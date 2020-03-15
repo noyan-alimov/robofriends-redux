@@ -1,0 +1,22 @@
+.card {
+  background-color: lightgreen;
+  height: 350px;
+  width: 300px;
+  border-radius: 20px;
+  margin: 20px 20px;
+  box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
+  padding-bottom: 20px
+}
+
+.image {
+  height: 75%;
+  width: 75%
+}
+
+.name {
+  font-size: 20px;
+}
+
+.email {
+  font-size: 15px;
+}
