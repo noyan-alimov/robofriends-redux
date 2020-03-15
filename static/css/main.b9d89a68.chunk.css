@@ -1,0 +1,2 @@
+body{margin:0;padding:0;font-family:"Roboto Mono",monospace}.title{text-align:center;font-size:50px}.searchbox-container{display:flex;align-items:center;justify-content:center;margin:50px}.robots-container{text-align:center;display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));grid-gap:10px}.card{background-color:#90ee90;height:350px;width:300px;border-radius:20px;margin:20px;box-shadow:4px 4px 8px 0 rgba(0,0,0,.2);padding-bottom:20px}.image{height:75%;width:75%}.name{font-size:20px}.email{font-size:15px}
+/*# sourceMappingURL=main.b9d89a68.chunk.css.map */
