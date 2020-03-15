@@ -1,46 +1,55 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import './App.css';
 import Card from './components/card';
-import { robots } from './components/robots';
 import Searchbox from './components/searchbox';
+import { setSearchField, getRobotsData } from './redux/actions';
+
+const mapStateToProps = state => ({
+  searchField: state.searchRobots.searchField,
+  isPending: state.requestRobots.isPending,
+  robots: state.requestRobots.robots,
+  error: state.requestRobots.error
+})
+
+const mapDispatchToProps = (dispatch) => ({
+  onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
+  onRequestRobots: () => dispatch(getRobotsData())
+})
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchbox: '',
-    }
-  }
-
-  onSearchChange = (event) => {
-    this.setState({ searchbox: event.target.value })
+  componentDidMount() {
+    this.props.onRequestRobots()
   }
 
   render() {
-    const filteredRobots = robots.filter(robot => robot.name.toLowerCase().includes(this.state.searchbox.toLowerCase()));
+    const { robots, searchField, onSearchChange, isPending } = this.props;
+    const filteredRobots = robots.filter(robot => robot.name.toLowerCase().includes(searchField.toLowerCase()));
 
-    return (
-      <div className='App'>
-        <h1 className='title'>ROBOFRIENDS</h1>
-        <div className='searchbox-container'>
-          <Searchbox searchbox={this.onSearchChange}/>
+    return isPending ?
+      <h1 style={{ margin: '50px 50px' }}>Loading...</h1> :
+      (
+        <div className='App'>
+          <h1 className='title'>ROBOFRIENDS</h1>
+          <div className='searchbox-container'>
+            <Searchbox searchbox={onSearchChange}/>
+          </div>
+          <div className="robots-container">
+            {
+              filteredRobots.map(robot => {
+                return(
+                  <Card
+                    name={robot.name}
+                    email={robot.email}
+                    id={robot.id}
+                  />
+                );
+              })
+            }
+          </div>
         </div>
-        <div className="robots-container">
-          {
-            filteredRobots.map(robot => {
-              return(
-                <Card
-                  name={robot.name}
-                  email={robot.email}
-                  id={robot.id}
-                />
-              );
-            })
-          }
-        </div>
-      </div>
-    );
+      );
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
