@@ -1,0 +1,16 @@
+.search-input {
+  height: 50px;
+  width: 400px;
+  font-size: 20px;
+  background-color: pink;
+  border-radius: 5px;
+  color: purple;
+  padding: 5px 10px;
+  box-shadow: 4px 4px 8px 0px rgba( 0, 0, 0, 0.2 );
+}
+
+@media (max-width: 800px) {
+  .search-input {
+    width: 275px
+  }
+}
